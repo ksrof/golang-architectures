@@ -3,7 +3,6 @@
 package main
 
 import (
-	"fmt"
 	"layered-architecture/datastore/character"
 	HandlerCharacter "layered-architecture/delivery/character"
 	"layered-architecture/driver"
@@ -33,5 +32,11 @@ func main() {
 	handler := HandlerCharacter.New(datastore)
 
 	http.HandleFunc("/character", handler.Handler)
-	fmt.Println(http.ListenAndServe(":8080", nil))
+	err = http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Println("could not serve handlers, err:", err)
+		return
+	} else {
+		log.Println("successfully running on port: 8080")
+	}
 }
