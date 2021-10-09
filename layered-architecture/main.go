@@ -9,9 +9,19 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	var err error
+	
+	// loading env variables
+	err = godotenv.Load()
+	if err != nil {
+		log.Println("could not load the .env file")
+	}
+
 	conf := driver.MySQLConfig{
 		Host: os.Getenv("SQL_HOST"),
 		User: os.Getenv("SQL_USER"),
@@ -19,8 +29,6 @@ func main() {
 		Port: os.Getenv("SQL_PORT"),
 		DB: os.Getenv("SQL_DB"),
 	}
-
-	var err error
 	
 	db, err := driver.MySQLConnect(conf)
 	if err != nil {
