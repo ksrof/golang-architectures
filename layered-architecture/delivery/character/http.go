@@ -6,18 +6,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"layered-architecture/datastore"
 	"layered-architecture/entities"
+	"layered-architecture/usecase"
 	"net/http"
 	"strconv"
 )
 
 type CharacterHandler struct {
-	datastore datastore.Character
+	usecase usecase.Character
 }
 
-func New(character datastore.Character) CharacterHandler {
-	return CharacterHandler{datastore: character}
+func New(character usecase.Character) CharacterHandler {
+	return CharacterHandler{usecase: character}
 }
 
 func (c CharacterHandler) Handler(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +43,7 @@ func (c CharacterHandler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := c.datastore.Get(cid)
+	resp, err := c.usecase.Get(cid)
 	if err != nil {
 		_, _ = w.Write([]byte("could not retrieve character"))
 		w.WriteHeader(http.StatusInternalServerError)
@@ -70,7 +70,7 @@ func (c CharacterHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := c.datastore.Create(character)
+	resp, err := c.usecase.Create(character)
 	if err != nil {
 		_, _ = w.Write([]byte("could not create character"))
 		w.WriteHeader(http.StatusInternalServerError)
