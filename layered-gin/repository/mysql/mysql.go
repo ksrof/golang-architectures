@@ -29,7 +29,9 @@ func (c CharacterRepo) GetAll(characters []entity.Character) ([]entity.Character
 }
 
 // GetByID() returns a specific character
-func (c CharacterRepo) GetByID(id int, character entity.Character) (entity.Character, error) {
+func (c CharacterRepo) GetByID(id int) (entity.Character, error) {
+	var character entity.Character
+
 	err := c.DB.Model(entity.Character{}).Where("id = ?", id).Take(character).Error
 	if err != nil {
 		log.Printf("unable to find character")
