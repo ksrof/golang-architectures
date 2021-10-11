@@ -28,7 +28,7 @@ func (c CharacterUse) GetAll(characters []entity.Character) ([]entity.Character,
 }
 
 // GetByID() returns a specific character
-func (c CharacterUse) GetByID(id int) (entity.Character, error) {
+func (c CharacterUse) GetByID(id uint) (entity.Character, error) {
 	resp, err := c.repo.GetByID(id)
 	if err != nil {
 		log.Printf("could not get character")
