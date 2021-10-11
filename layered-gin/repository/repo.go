@@ -5,6 +5,7 @@ package repository
 import "layered-gin/entity"
 
 type Character interface {
-	Get(id int) ([]entity.Character, error)
+	GetAll([]entity.Character) ([]entity.Character, error)
+	GetByID(id int) (entity.Character, error)
 	Create(entity.Character) (entity.Character, error)
 }
