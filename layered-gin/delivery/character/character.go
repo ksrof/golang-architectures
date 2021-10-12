@@ -23,7 +23,7 @@ func New(character usecase.Character) CharacterHandler {
 
 // GetAll() makes a GET request and returns all characters
 func (c CharacterHandler) GetAll(g *gin.Context) {
-	var characters []entity.Character
+	var characters *[]entity.Character
 
 	chars, err := c.usecase.GetAll(characters)
 	if err != nil {
@@ -75,7 +75,7 @@ func (c CharacterHandler) GetByID(g *gin.Context) {
 
 // Create() makes a POST request and returns a newly created character
 func (c CharacterHandler) Create(g *gin.Context) {
-	var character entity.Character
+	var character *entity.Character
 
 	body, err := ioutil.ReadAll(g.Request.Body)
 	if err != nil {
@@ -88,18 +88,7 @@ func (c CharacterHandler) Create(g *gin.Context) {
 		return
 	}
 
-	char, err := c.usecase.Create(character)
-	if err != nil {
-		g.JSON(400, gin.H{
-			"status": http.StatusBadRequest,
-			"error": err,
-			"msg": "unable to create character",
-		})
-		g.Abort()
-		return
-	}
-
-	err = json.Unmarshal(body, &char)
+	err = json.Unmarshal(body, &character)
 	if err != nil {
 		g.JSON(500, gin.H{
 			"status": http.StatusUnprocessableEntity, 
@@ -109,9 +98,9 @@ func (c CharacterHandler) Create(g *gin.Context) {
 		g.Abort()
 		return
 	}
-
-	entity.Prepare(character)
-	err = entity.Validate("create", character)
+	
+	character.Prepare()
+	err = character.Validate("create")
 	if err != nil {
 		g.JSON(500, gin.H{
 			"status": http.StatusUnprocessableEntity,
@@ -122,7 +111,7 @@ func (c CharacterHandler) Create(g *gin.Context) {
 		return
 	}
 
-	char, err = c.usecase.Create(character)
+	character, err = c.usecase.Create(character)
 	if err != nil {
 		g.JSON(500, gin.H{
 			"status": http.StatusInternalServerError,
@@ -135,6 +124,6 @@ func (c CharacterHandler) Create(g *gin.Context) {
 	
 	g.JSON(200, gin.H{
 		"status": http.StatusOK,
-		"character": char,
+		"character": character,
 	})
 }
