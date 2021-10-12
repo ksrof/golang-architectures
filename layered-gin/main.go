@@ -5,6 +5,7 @@ package main
 import (
 	HandlerCharacter "layered-gin/delivery/character"
 	"layered-gin/driver"
+	"layered-gin/entity"
 	character "layered-gin/repository/character"
 	"log"
 	"os"
@@ -34,6 +35,12 @@ func main() {
 	db, err := driver.InitDB(conf)
 	if err != nil {
 		log.Fatalf("unable to connect to sql")
+	}
+
+	// Database migration
+	err = db.AutoMigrate(&entity.Character{})
+	if err != nil {
+		log.Fatalf("unable to migrate database")
 	}
 
 	// Router setup to handle requests
