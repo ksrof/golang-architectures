@@ -11,7 +11,7 @@ import (
 )
 
 // Prepare() cleans struct fields
-func Prepare(character Character) {
+func (character *Character) Prepare() {
 	character.Name = html.EscapeString(character.Name)
 	character.Title = html.EscapeString(character.Title)
 	character.Gender = html.EscapeString(strings.TrimSpace(character.Gender))
@@ -22,7 +22,7 @@ func Prepare(character Character) {
 }
 
 // Validate() validates struct fields
-func Validate(action string, character Character) error {
+func (character *Character) Validate(action string) error {
 	validate := validator.New()
 
 	switch strings.ToLower(action) {
