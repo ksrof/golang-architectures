@@ -25,7 +25,7 @@ func New(character usecase.Character) CharacterHandler {
 func (c CharacterHandler) GetAll(g *gin.Context) {
 	var characters *[]entity.Character
 
-	chars, err := c.usecase.GetAll(characters)
+	characters, err := c.usecase.GetAll(characters)
 	if err != nil {
 		g.JSON(500, gin.H{
 			"status": http.StatusInternalServerError,
@@ -38,7 +38,7 @@ func (c CharacterHandler) GetAll(g *gin.Context) {
 
 		g.JSON(200, gin.H{
 			"status": http.StatusOK,
-			"characters": chars,
+			"characters": characters,
 		})
 }
 
@@ -56,7 +56,7 @@ func (c CharacterHandler) GetByID(g *gin.Context) {
 		return
 	}
 
-	char, err := c.usecase.GetByID(uint(id))
+	character, err := c.usecase.GetByID(uint(id))
 	if err != nil {
 		g.JSON(400, gin.H{
 			"status": http.StatusBadRequest,
@@ -69,7 +69,7 @@ func (c CharacterHandler) GetByID(g *gin.Context) {
 
 	g.JSON(200, gin.H{
 		"status": http.StatusOK,
-		"character": char,
+		"character": character,
 	})
 }
 
