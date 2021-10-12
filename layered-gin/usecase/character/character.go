@@ -17,7 +17,7 @@ func New(character repository.Character) CharacterUse {
 }
 
 // GetAll() returns all characters
-func (c CharacterUse) GetAll(characters []entity.Character) ([]entity.Character, error) {
+func (c CharacterUse) GetAll(characters *[]entity.Character) (*[]entity.Character, error) {
 	resp, err := c.repo.GetAll(characters)
 	if err != nil {
 		log.Printf("could not get characters")
@@ -28,7 +28,7 @@ func (c CharacterUse) GetAll(characters []entity.Character) ([]entity.Character,
 }
 
 // GetByID() returns a specific character
-func (c CharacterUse) GetByID(id uint) (entity.Character, error) {
+func (c CharacterUse) GetByID(id uint) (*entity.Character, error) {
 	resp, err := c.repo.GetByID(id)
 	if err != nil {
 		log.Printf("could not get character")
@@ -39,7 +39,7 @@ func (c CharacterUse) GetByID(id uint) (entity.Character, error) {
 }
 
 // Create() creates a character
-func (c CharacterUse) Create(character entity.Character) (entity.Character, error) {
+func (c CharacterUse) Create(character *entity.Character) (*entity.Character, error) {
 	resp, err := c.repo.Create(character)
 	if err != nil {
 		log.Printf("could create character")
