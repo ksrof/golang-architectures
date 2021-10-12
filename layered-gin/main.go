@@ -1,6 +1,6 @@
 // layered-gin/main.go
 
-package layeredgin
+package main
 
 import (
 	HandlerCharacter "layered-gin/delivery/character"
