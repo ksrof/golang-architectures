@@ -12,8 +12,8 @@ import (
 
 // InitDB() starts the database connection
 func InitDB(conf DBConfig) (*gorm.DB, error) {
-	conn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v", conf.User, conf.Pass, conf.Host, conf.Port, conf.Name)
-	
+	conn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=true&loc=Local", conf.User, conf.Pass, conf.Host, conf.Port, conf.Name)
+
 	db, err := gorm.Open(mysql.Open(conn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("unable to connect to the database")
