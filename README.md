@@ -5,7 +5,6 @@
 <div align="center">
   <a href="https://github.com/ksrof/golang-architectures">
     <img src="docs/images/gopherworking.png" alt="Gopher working logo" width="160" height="160">
-    <small>This image is non of my property, for any claims <a href="https://www.jing.fm/iclipt/xbJJoi/" alt="source">source</a></small>
   </a>
 
 <h3 align="center">🏗️ Golang Architectures</h3>
