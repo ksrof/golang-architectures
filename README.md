@@ -115,10 +115,15 @@ Finally the (`repository-layer`) makes an SQL query to create a new character en
 
 
 ## Built With
+In this repo you can find examples made with the [Net/HTTP Package](https://pkg.go.dev/net/http) that comes from the standard library, and examples made with [Gin](https://github.com/gin-gonic/gin) and [Gorm](https://gorm.io).
+
+**Note:** The HTTP example uses an external package called [Go-SQL-Driver](https://github.com/go-sql-driver/mysql) to use MySQL. And both examples rely on [Godotenv](https://github.com/joho/godotenv) to load .env files.
 
 - [Golang](https://golang.org)
 - [Gin](https://github.com/gin/gin-gonic)
 - [Gorm](https://gorm.io)
+
+Thanks to every one who is involved on each of this projects, and to the open-source community that keeps the world running contributing with their code.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
